@@ -1,0 +1,61 @@
+﻿@using WiFiMonitor.Models
+@model List<WiFiModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .tr {
+        text-align: center
+    }
+    .th{
+        text-align:center
+    }
+    .td {
+        text-align: center
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>WiFi Monitor</h1>
+    <p class="lead">A wifi monitoring application for CST-323</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <p style="width:120%">
+            In this application you view the wifi data that we are collecting from the GCU wifi
+            We are using a raspberry pi that runs a bash script, that runs a python script
+            This python script calls a wifi information collecting method we imported
+            It then uploads this to a database using an api we are hosing in Azure
+            Then here we get that information from the database and deserialize it
+            And that is how you are able to view this wifi data.
+        </p>
+    </div>
+</div>
+<br /><br /><br />
+<div style="width:100%">
+    <table style="width:100%; text-align:center">
+        <tr>
+            <th>Date and time</th>
+            <th>Download Speed</th>
+            <th>Upload Speed</th>
+            <th>Ping</th>
+        </tr>
+        @foreach (WiFiModel m in Model)
+        {
+            if (m != null)
+            {
+                <tr>
+                    <td>@(m.timestamp)</td>
+                    <td>@(m.download)</td>
+                    <td>@(m.upload)</td>
+                    <td>@(m.ping)</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

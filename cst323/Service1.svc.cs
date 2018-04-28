@@ -24,6 +24,8 @@ namespace cst323
 
         public string PostSpeed(RequestInput json)
         {
+            json.data = json.data.Replace('\'', '\"');
+            json.data = json.data.Replace("None", "\"None\"");
             string response;
             cstDAO service = new cstDAO();
             if (service.CreateRow(json.data))
